@@ -16,12 +16,26 @@ import java.util.Scanner;
 public class CoffeeMachine {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int cupsOfCoffee;
+        int cupsOfCoffee = 0;
+        int waterStored = 0;
+        int milkStored = 0;
+        int coffeeBeansStored = 0;
 
-        System.out.println("Write how many cups of coffee you will need:");
+        System.out.println("Write how many ml of water the coffee machine has: ");
+        waterStored = scanner.nextInt();
+        System.out.println("Write how many ml of milk the coffee machine has: ");
+        milkStored = scanner.nextInt();
+        System.out.println("Write how many grams of coffee beans the coffee machine has: ");
+        coffeeBeansStored = scanner.nextInt();
+        System.out.println("Write how many cups of coffee you will need: ");
         cupsOfCoffee = scanner.nextInt();
 
        calculateIngredients(cupsOfCoffee);
+    }
+
+    public static int estimateServings(int waterStored, int milkStored, int coffeeBeansStored) {
+
+        return 0;
     }
 
     public static void calculateIngredients(int cupsOfCoffee) {
