@@ -1,14 +1,8 @@
 package machine;
 
     /*
-    * v1.2
+    * v2.0
     * Estimate the amount of servings
-    *
-    * 1 cup of coffee
-    *   200 ml of watter
-    *   50 ml of milk
-    *   15g of coffee beans
-    *
     * */
 
 import java.util.Scanner;
@@ -19,37 +13,43 @@ public class CoffeeMachine {
         int cupsOfCoffee = 0;
         int waterStored = 0;
         int milkStored = 0;
-        int coffeeBeansStored = 0;
+        int coffeeStored = 0;
+        final int waterNeeded = 200;
+        final int milkNeeded = 50;
+        final int coffeeNeed = 15;
+        int waterServings = 0;
+        int milkServings = 0;
+        int coffeeServings = 0;
+        int cupsServingsAvailable = 0;
+        boolean waterSmallerMilk;
+        boolean waterSmallerCoffee;
+        boolean milkSmallerCoffee;
 
         System.out.println("Write how many ml of water the coffee machine has: ");
         waterStored = scanner.nextInt();
         System.out.println("Write how many ml of milk the coffee machine has: ");
         milkStored = scanner.nextInt();
         System.out.println("Write how many grams of coffee beans the coffee machine has: ");
-        coffeeBeansStored = scanner.nextInt();
+        coffeeStored = scanner.nextInt();
         System.out.println("Write how many cups of coffee you will need: ");
         cupsOfCoffee = scanner.nextInt();
 
-       calculateIngredients(cupsOfCoffee);
-    }
+        waterServings = waterStored / waterNeeded;
+        milkServings = milkStored / milkNeeded;
+        coffeeServings = coffeeStored / coffeeNeed;
 
-    public static int estimateServings(int waterStored, int milkStored, int coffeeBeansStored) {
+        waterSmallerMilk = waterServings < milkServings;
+        waterSmallerCoffee = waterServings < coffeeServings;
+        milkSmallerCoffee = milkServings < coffeeServings;
 
-        return 0;
-    }
+        cupsServingsAvailable = waterSmallerMilk && waterSmallerCoffee ? waterServings : milkSmallerCoffee ? milkServings : coffeeServings;
 
-    public static void calculateIngredients(int cupsOfCoffee) {
-        int water = 200;
-        int milk = 50;
-        int coffee = 15;
-
-        water *= cupsOfCoffee;
-        milk *= cupsOfCoffee;
-        coffee *= cupsOfCoffee;
-
-        System.out.println("For " + cupsOfCoffee + " cups of coffee you will need: ");
-        System.out.println(water + " ml of water");
-        System.out.println(milk + " ml of milk");
-        System.out.println(coffee + "g of coffee beans");
+        if (cupsServingsAvailable == cupsOfCoffee) {
+            System.out.println("Yes, I can make that amount of coffee");
+        } else if (cupsServingsAvailable > cupsOfCoffee) {
+            System.out.println("Yes, I can make that amount of coffee (and even " + (cupsServingsAvailable - cupsOfCoffee) + " more than that)");
+        } else {
+            System.out.println("No, I can make only " + cupsServingsAvailable + " cup(s) of coffee");
+        }
     }
 }
